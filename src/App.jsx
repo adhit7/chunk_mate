@@ -72,36 +72,34 @@ export default function App() {
 
       <div
         className={`
-          fixed z-40 lg:static lg:translate-x-0 
-          top-0 left-0 h-full w-64 bg-gray-900 text-white p-4 flex flex-col justify-between
-          transform transition-transform duration-300
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-        `}
+    fixed z-40 lg:static lg:translate-x-0 
+    top-0 left-0 h-full w-64 bg-gray-900 text-white p-4 flex flex-col
+    transform transition-transform duration-300
+    ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+  `}
       >
-        <div>
-          <div className='flex items-center justify-between mb-6'>
-            <h1 className='text-2xl font-bold'>Chunk Mate</h1>
-            <button className='lg:hidden' onClick={() => setSidebarOpen(false)}>
-              <X className='text-white' />
-            </button>
-          </div>
-
-          <div className='space-y-2'>
-            {docs.map((doc) => (
-              <button
-                key={doc.id}
-                onClick={() => getChunkData(doc)}
-                className={`w-full text-left px-3 py-2 rounded-md transition ${
-                  activeDoc === doc.file ? 'bg-gray-700' : 'hover:bg-gray-800'
-                }`}
-              >
-                {formatFileName(doc.file)}
-              </button>
-            ))}
-          </div>
+        <div className='flex items-center justify-between mb-6 shrink-0'>
+          <h1 className='text-2xl font-bold'>Chunk Mate</h1>
+          <button className='lg:hidden' onClick={() => setSidebarOpen(false)}>
+            <X className='text-white' />
+          </button>
         </div>
 
-        <div className='mt-6'>
+        <div className='flex-1 overflow-y-auto space-y-2'>
+          {docs.map((doc) => (
+            <button
+              key={doc.id}
+              onClick={() => getChunkData(doc)}
+              className={`w-full text-left px-3 py-2 rounded-md transition break-words whitespace-normal ${
+                activeDoc === doc.file ? 'bg-gray-700' : 'hover:bg-gray-800'
+              }`}
+            >
+              {formatFileName(doc.file)}
+            </button>
+          ))}
+        </div>
+
+        <div className='mt-4 shrink-0'>
           <button
             className='w-full flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md font-semibold'
             onClick={handleUpload}
